@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs</title>
+    <link rel="stylesheet" href="styles.css">
+   <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #1c1f24;
+        color: #e0e0e0;
+        min-height: 100vh;
+        padding-top: 80px;
+        box-sizing: border-box;
+    }
+
+    /* HEADER */
+    header {
+        background: #2a2f38;
+        color: #00ffff;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        margin: 0;
+    }
+
+    nav ul li {
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        color: #00ffff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: cyan;
+    }
+
+    /* SIDEBAR */
+    .container {
+        display: flex;
+        flex-grow: 1;
+        margin-top: 0px;
+    }
+
+    .sidebar {
+        width: 220px;
+        background: #1a1d22;
+        color: #e0e0e0;
+        padding: 20px;
+        height: 85vh;
+        overflow-y: auto;
+        margin-top: 40px;
+        left: 0;
+        z-index: 999;
+        border-top: 2px solid #00ffff;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        color: #00ffff;
+        margin-top: 0;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding-left: 20px;
+    }
+
+    .sidebar > ul > li {
+        padding: 12px 10px;
+        margin: 10px 0;
+        border-bottom: 1px solid #00ffff33;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar > ul > li:hover {
+        background-color: cyan;
+        color: #1c1f24;
+        transform: translateX(5px);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    .sidebar ul .sub-menu {
+        padding-left: 30px;
+    }
+
+    .sidebar ul .sub-menu li {
+        list-style-type: circle;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    .sidebar ul li a {
+        color: #e0e0e0;
+        text-decoration: none;
+        display: block;
+    }
+
+    .sidebar ul li a:hover {
+        background: cyan;
+        padding-left: 10px;
+        color: #1c1f24;
+        border-radius: 5px;
+    }
+
+    .sub-menu {
+        display: none;
+        padding-left: 30px;
+    }
+
+    .sub-menu.active {
+        display: block;
+    }
+
+    /* CONTENT */
+    .content {
+        margin-left: 0px;
+        padding: 50px 50px;
+        flex-grow: 1;
+        margin-top: 40px;
+    }
+
+    /* Make list of questions soft white in both query-section tables */
+    #table-of-contents1 ul li a,
+    #table-of-contents2 ul li a {
+        color: #f5f5f5 !important;
+    }
+
+    #table-of-contents1 ul li a:hover,
+    #table-of-contents2 ul li a:hover {
+        color: cyan !important;
+    }
+
+    .query-section {
+        background-color: #2a2f38;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 5px solid #00ffff;
+        margin-bottom: 30px;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    }
+
+    .query-section h3 {
+        color: #00ffff;
+        margin-bottom: 10px;
+    }
+
+    .query-section p {
+        font-size: 16px;
+        color: #cfd8dc;
+        line-height: 1.6;
+        word-spacing: 2px;
+        letter-spacing: 1px;
+    }
+
+    pre {
+        background-color: #1c1f24;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border-left: 4px solid #00ffff;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        border-radius: 5px;
+        overflow-x: auto;
+        color: #e0e0e0;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+    }
+
+    /* BUTTONS */
+    .back-btn {
+        background-color: #00ffff;
+        color: #1c1f24;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        font-weight: 600;
+    }
+
+    .back-btn:hover {
+        background-color: cyan;
+        color: #1c1f24;
+        transform: translateY(-2px);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    /* ---------- LOGO CONTAINER ---------- */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo-container img {
+        width: 40px;
+        height: 40px;
+        filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.6));
+    }
+
+    .logo-container h1 {
+        color: #00ffff;
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 10px;
+        background: #2a2f38;
+        color: #888;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: auto;
+        border-top: 1px solid #00ffff;
+        box-shadow: 0 -2px 10px rgba(0, 255, 255, 0.1);
+    }
+
+    footer span {
+        color: #00ffff;
+        font-weight: bold;
+    }
+
+    /* TABLE OF CONTENTS */
+    #table-of-contents ul li a {
+        text-decoration: none !important;
+        color: #00ffff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    #table-of-contents ul li a:hover {
+        color: cyan;
+    }
+
+    /* FULLSCREEN AREA */
+    .fullscreen {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #1a1d22;
+        z-index: 10;
+        overflow: auto;
+    }
+</style>
+
+
+
+<script>
+        // JavaScript to toggle visibility of content sections
+        function toggleSubmenu(id) {
+            var submenu = document.getElementById(id);
+            submenu.classList.toggle("active");
+        }
+
+        function showContent(sectionId) {
+            var sections = document.querySelectorAll('.query-section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            var selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var sections = document.querySelectorAll('.query-section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            showContent('welcome-section'); // Show welcome section by default
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java Logo">
+      <h1>JAVA</h1>
+    </div>
+        <nav>
+            <ul>
+                <li><a href="homejava.html">Home</a></li>
+                <li><a href="corejava.html">Core Java</a></li>
+                <li><a href="intermediatejava.html">Intermediate Java</a></li>
+                <li><a href="advancejava.html">Advance Java</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>Index</h2>
+            <ul>               
+                <li onclick="showContent('table-of-contents1')" class="menu-item" style="display: flex; align-items: center;">        
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/report-4001166-3307235.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                JDBC
+                </li>
+
+                <li onclick="showContent('table-of-contents2')" class="menu-item" style="display: flex; align-items: center;">
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/report-4001166-3307235.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                Multi-threading
+                </li>
+                </ul>            
+        </div>
+
+        <div class="content">
+
+<div id="welcome-section" class="query-section" active style="top: 180px; left: 450px; width: 100%; height: 500px;">
+    <h2>Advance Java	</h2>
+    <p>This section is your complete guide to Advance Java concepts and programs. Explore how Java is used.</p>
+    <p>Advance Java focuses on advanced programming topics such as:</p>
+    <ul type="disc">
+      <li>Java Database Connectivity (JDBC)</li>
+      <li>Multithreading</li>
+    </ul>
+</div>
+
+<div class="query-section" id="table-of-contents1">
+    <h3>Java Database Connectivity:</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('j1')">1. Create the connection with MySQL Database and manage the driver.</a></li>
+        <li><a href="#" onclick="showContent('j2')">2. Create the table in the database from Java API.</a></li>
+        <li><a href="#" onclick="showContent('j3')">3. Insert the row in the table in the database from Java API.</a></li>
+        <li><a href="#" onclick="showContent('j4')">4. Update the row in the table in the database from Java API</a></li>
+        <li><a href="#" onclick="showContent('j5')">5. Delete the row in the table in the database from Java API.</a></li>
+        <li><a href="#" onclick="showContent('j6')">6. Select multiple rows from the database table in Java API and show the result on the screen.</a></li>
+        <li><a href="#" onclick="showContent('j7')">7. Create a Java Program to show, insert, update, delete of the table in Java API through PreparedStatement</a></li>
+</ul>
+</div>
+
+<div class="query-section" id="table-of-contents2">
+    <h3>Multithreading:</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('m1')">1. Write a Java program to create a basic Java thread that prints "Hello, World!" when executed.</a></li>
+        <li><a href="#" onclick="showContent('m2')">2. Write a Java program that creates two threads to find and print even and odd numbers from 1 to 20.</a></li>
+        <li><a href="#" onclick="showContent('m3')">3. Write a Java program that sorts an array of integers using multiple threads.</a></li>
+        <li><a href="#" onclick="showContent('m4')">4. Write a Java program that performs matrix multiplication using multiple threads</a></li>
+        <li><a href="#" onclick="showContent('m5')">5. Write a Java program that calculates the sum of all prime numbers up to a given limit using multiple threads.</a></li>
+        <li><a href="#" onclick="showContent('m6')">6. Write a Java program to implement a concurrent web crawler that crawls multiple websites simultaneously using threads.</a></li>
+        <li><a href="#" onclick="showContent('m7')">7. Write a Java program that creates a bank account with concurrent deposits and withdrawals using threads.</a></li>
+        <li><a href="#" onclick="showContent('m8')">8. Create the program to create multiple threads by using Runnbale interface</a></li>
+        <li><a href="#" onclick="showContent('m9')">9. Create the program to create multiple threads by using Thread class</a></li>
+        <li><a href="#" onclick="showContent('m10')">10. Create the program to create multiple threads, set its name and its priority.</a></li>
+</ul>
+</div>
+
+ <div class="query-section" id="j1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class MySQLConnectionExample {
+    public static void main(String[] args) {
+        // Database URL, username, and password
+        String url = "jdbc:mysql://localhost:3306/testdb"; // replace testdb with your DB name
+        String username = "root"; // your MySQL username
+        String password = "password"; // your MySQL password
+
+        Connection con = null;
+
+        try {
+            // Load and register the MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver Loaded Successfully.");
+
+            // Establish the connection
+            con = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected to the Database Successfully.");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Connection Failed.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                    System.out.println("Connection Closed.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Driver Loaded Successfully.
+Connected to the Database Successfully.
+Connection Closed.
+  </pre>
+</div>
+
+ <div class="query-section" id="j2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.SQLException;
+
+public class CreateTableExample {
+    public static void main(String[] args) {
+        // Database connection details
+        String url = "jdbc:mysql://localhost:3306/testdb"; // replace testdb with your database
+        String username = "root"; // MySQL username
+        String password = "password"; // MySQL password
+
+        Connection con = null;
+        Statement stmt = null;
+
+        try {
+            // Load MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to the database
+            con = DriverManager.getConnection(url, username, password);
+
+            // Create a Statement
+            stmt = con.createStatement();
+
+            // SQL query to create table
+            String sql = "CREATE TABLE Student (" +
+                         "id INT PRIMARY KEY AUTO_INCREMENT," +
+                         "name VARCHAR(50)," +
+                         "age INT," +
+                         "city VARCHAR(50))";
+
+            // Execute the query
+            stmt.executeUpdate(sql);
+            System.out.println("Table 'Student' created successfully.");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error creating table.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Table 'Student' created successfully.
+  </pre>
+</div>
+
+ <div class="query-section" id="j3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.SQLException;
+
+public class InsertRowExample {
+    public static void main(String[] args) {
+        // Database connection details
+        String url = "jdbc:mysql://localhost:3306/testdb"; // replace testdb with your database
+        String username = "root"; // MySQL username
+        String password = "password"; // MySQL password
+
+        Connection con = null;
+        Statement stmt = null;
+
+        try {
+            // Load MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to the database
+            con = DriverManager.getConnection(url, username, password);
+
+            // Create a Statement
+            stmt = con.createStatement();
+
+            // SQL query to insert a row
+            String sql = "INSERT INTO Student (name, age, city) " +
+                         "VALUES ('Vansh', 20, 'Delhi')";
+
+            // Execute the query
+            int rows = stmt.executeUpdate(sql);
+            System.out.println(rows + " row(s) inserted successfully.");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error inserting row.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+1 row(s) inserted successfully.
+  </pre>
+</div>
+
+ <div class="query-section" id="j4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.SQLException;
+
+public class UpdateRowExample {
+    public static void main(String[] args) {
+        // Database connection details
+        String url = "jdbc:mysql://localhost:3306/testdb"; // replace testdb with your database
+        String username = "root"; // MySQL username
+        String password = "password"; // MySQL password
+
+        Connection con = null;
+        Statement stmt = null;
+
+        try {
+            // Load MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to the database
+            con = DriverManager.getConnection(url, username, password);
+
+            // Create a Statement
+            stmt = con.createStatement();
+
+            // SQL query to update a row
+            String sql = "UPDATE Student SET city='Mumbai' WHERE name='Vansh'";
+
+            // Execute the query
+            int rows = stmt.executeUpdate(sql);
+            System.out.println(rows + " row(s) updated successfully.");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error updating row.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+1 row(s) updated successfully.
+  </pre>
+</div>
+
+ <div class="query-section" id="j5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.SQLException;
+
+public class DeleteRowExample {
+    public static void main(String[] args) {
+        // Database connection details
+        String url = "jdbc:mysql://localhost:3306/testdb"; // replace testdb with your database
+        String username = "root"; // MySQL username
+        String password = "password"; // MySQL password
+
+        Connection con = null;
+        Statement stmt = null;
+
+        try {
+            // Load MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to the database
+            con = DriverManager.getConnection(url, username, password);
+
+            // Create a Statement
+            stmt = con.createStatement();
+
+            // SQL query to delete a row
+            String sql = "DELETE FROM Student WHERE name='Vansh'";
+
+            // Execute the query
+            int rows = stmt.executeUpdate(sql);
+            System.out.println(rows + " row(s) deleted successfully.");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error deleting row.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+1 row(s) deleted successfully.
+  </pre>
+</div>
+
+ <div class="query-section" id="j6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+public class SelectRowsExample {
+    public static void main(String[] args) {
+        // Database connection details
+        String url = "jdbc:mysql://localhost:3306/testdb"; // replace testdb with your DB name
+        String username = "root"; // MySQL username
+        String password = "password"; // MySQL password
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try 
+            // Load MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Connect to database
+            con = DriverManager.getConnection(url, username, password);
+            // Create Statement
+            stmt = con.createStatement();
+            // SQL query to select all rows
+            String sql = "SELECT * FROM Student";
+            // Execute query
+            rs = stmt.executeQuery(sql);
+            // Display results
+            System.out.println("ID\tName\tAge\tCity");
+            System.out.println("-------------------------------");
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                String city = rs.getString("city");
+                System.out.println(id + "\t" + name + "\t" + age + "\t" + city);
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error fetching rows.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+ID	Name	Age	City
+-------------------------------
+1	Vansh	20	Delhi
+2	Anika	22	Mumbai
+3	Rohan	19	Bangalore
+  </pre>
+</div>
+
+ <div class="query-section" id="j7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.sql.*;
+
+public class PreparedStatementCRUD {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/testdb"; // replace testdb with your DB
+        String username = "root";
+        String password = "password";
+
+        Connection con = null;
+
+        try {
+            // Load driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to database
+            con = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected to Database.");
+
+            // 1. INSERT
+            String insertSQL = "INSERT INTO Student (name, age, city) VALUES (?, ?, ?)";
+            PreparedStatement pstmtInsert = con.prepareStatement(insertSQL);
+            pstmtInsert.setString(1, "Vansh");
+            pstmtInsert.setInt(2, 20);
+            pstmtInsert.setString(3, "Delhi");
+            int inserted = pstmtInsert.executeUpdate();
+            System.out.println(inserted + " row(s) inserted.");
+
+            // 2. SELECT (SHOW)
+            String selectSQL = "SELECT * FROM Student";
+            PreparedStatement pstmtSelect = con.prepareStatement(selectSQL);
+            ResultSet rs = pstmtSelect.executeQuery();
+            System.out.println("ID\tName\tAge\tCity");
+            while(rs.next()) {
+                System.out.println(rs.getInt("id") + "\t" +
+                                   rs.getString("name") + "\t" +
+                                   rs.getInt("age") + "\t" +
+                                   rs.getString("city"));
+            }
+
+            // 3. UPDATE
+            String updateSQL = "UPDATE Student SET city=? WHERE name=?";
+            PreparedStatement pstmtUpdate = con.prepareStatement(updateSQL);
+            pstmtUpdate.setString(1, "Mumbai");
+            pstmtUpdate.setString(2, "Vansh");
+            int updated = pstmtUpdate.executeUpdate();
+            System.out.println(updated + " row(s) updated.");
+
+            // 4. DELETE
+            String deleteSQL = "DELETE FROM Student WHERE name=?";
+            PreparedStatement pstmtDelete = con.prepareStatement(deleteSQL);
+            pstmtDelete.setString(1, "Vansh");
+            int deleted = pstmtDelete.executeUpdate();
+            System.out.println(deleted + " row(s) deleted.");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Database error.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Connected to Database.
+1 row(s) inserted.
+ID	Name	Age	City
+1	Vansh	20	Delhi
+1 row(s) updated.
+1 row(s) deleted.
+  </pre>
+</div>
+
+ <div class="query-section" id="m1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+// Using Thread class
+class HelloThread extends Thread {
+    public void run() {
+        System.out.println("Hello, World!");
+    }
+}
+
+public class BasicThreadExample {
+    public static void main(String[] args) {
+        // Create thread instance
+        HelloThread t = new HelloThread();
+        
+        // Start the thread
+        t.start();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Hello, World!
+  </pre>
+</div>
+
+ <div class="query-section" id="m2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+// Thread to print even numbers
+class EvenThread extends Thread {
+    public void run() {
+        System.out.print("Even Numbers: ");
+        for(int i = 1; i <= 20; i++) {
+            if(i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+}
+
+// Thread to print odd numbers
+class OddThread extends Thread {
+    public void run() {
+        System.out.print("Odd Numbers: ");
+        for(int i = 1; i <= 20; i++) {
+            if(i % 2 != 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+}
+
+public class EvenOddThreadsExample {
+    public static void main(String[] args) {
+        // Create threads
+        EvenThread t1 = new EvenThread();
+        OddThread t2 = new OddThread();
+
+        // Start threads
+        t1.start();
+        t2.start();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Even Numbers: 2 4 6 8 10 12 14 16 18 20 
+Odd Numbers: 1 3 5 7 9 11 13 15 17 19 
+  </pre>
+</div>
+
+ <div class="query-section" id="m3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Arrays;
+
+class SortThread extends Thread {
+    private int[] arr;
+
+    public SortThread(int[] arr) {
+        this.arr = arr;
+    }
+
+    public void run() {
+        Arrays.sort(arr); // Sort the sub-array
+    }
+
+    public int[] getSortedArray() {
+        return arr;
+    }
+}
+
+public class MultiThreadSortExample {
+    // Merge two sorted arrays
+    public static int[] merge(int[] arr1, int[] arr2) {
+        int[] merged = new int[arr1.length + arr2.length];
+        int i=0, j=0, k=0;
+
+        while(i < arr1.length && j < arr2.length) {
+            if(arr1[i] < arr2[j]) merged[k++] = arr1[i++];
+            else merged[k++] = arr2[j++];
+        }
+
+        while(i < arr1.length) merged[k++] = arr1[i++];
+        while(j < arr2.length) merged[k++] = arr2[j++];
+
+        return merged;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        int[] arr = {12, 4, 7, 9, 1, 15, 6, 2};
+        int mid = arr.length / 2;
+
+        // Divide array into two halves
+        int[] firstHalf = Arrays.copyOfRange(arr, 0, mid);
+        int[] secondHalf = Arrays.copyOfRange(arr, mid, arr.length);
+
+        // Create threads to sort each half
+        SortThread t1 = new SortThread(firstHalf);
+        SortThread t2 = new SortThread(secondHalf);
+
+        t1.start();
+        t2.start();
+
+        // Wait for both threads to finish
+        t1.join();
+        t2.join();
+
+        // Merge the sorted halves
+        int[] sortedArray = merge(t1.getSortedArray(), t2.getSortedArray());
+
+        // Display sorted array
+        System.out.println("Sorted Array: " + Arrays.toString(sortedArray));
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Sorted Array: [1, 2, 4, 6, 7, 9, 12, 15]
+  </pre>
+</div>
+
+ <div class="query-section" id="m4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+class MatrixMultiplicationThread extends Thread {
+    private int[][] A;
+    private int[][] B;
+    private int[][] C;
+    private int row;
+    private int col;
+
+    public MatrixMultiplicationThread(int[][] A, int[][] B, int[][] C, int row, int col) {
+        this.A = A;
+        this.B = B;
+        this.C = C;
+        this.row = row;
+        this.col = col;
+    }
+
+    public void run() {
+        int sum = 0;
+        for (int k = 0; k < B.length; k++) {
+            sum += A[row][k] * B[k][col];
+        }
+        C[row][col] = sum;
+    }
+}
+
+public class MultiThreadMatrixMultiplication {
+    public static void main(String[] args) throws InterruptedException {
+        int[][] A = {
+            {1, 2, 3},
+            {4, 5, 6}
+        };
+
+        int[][] B = {
+            {7, 8},
+            {9, 10},
+            {11, 12}
+        };
+
+        int rowsA = A.length;
+        int colsA = A[0].length;
+        int colsB = B[0].length;
+
+        int[][] C = new int[rowsA][colsB];
+
+        // Create and start threads for each element in the result matrix
+        Thread[][] threads = new Thread[rowsA][colsB];
+
+        for (int i = 0; i < rowsA; i++) {
+            for (int j = 0; j < colsB; j++) {
+                threads[i][j] = new MatrixMultiplicationThread(A, B, C, i, j);
+                threads[i][j].start();
+            }
+        }
+
+        // Wait for all threads to finish
+        for (int i = 0; i < rowsA; i++) {
+            for (int j = 0; j < colsB; j++) {
+                threads[i][j].join();
+            }
+        }
+
+        // Display result matrix
+        System.out.println("Result Matrix C:");
+        for (int i = 0; i < rowsA; i++) {
+            for (int j = 0; j < colsB; j++) {
+                System.out.print(C[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Result Matrix C:
+58 64
+139 154
+  </pre>
+</div>
+
+ <div class="query-section" id="m5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+class PrimeSumThread extends Thread {
+    private int start;
+    private int end;
+    private int sum;
+
+    public PrimeSumThread(int start, int end) {
+        this.start = start;
+        this.end = end;
+        this.sum = 0;
+    }
+
+    public void run() {
+        for (int i = start; i <= end; i++) {
+            if (isPrime(i)) {
+                sum += i;
+            }
+        }
+    }
+
+    private boolean isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+}
+
+public class MultiThreadPrimeSum {
+    public static void main(String[] args) throws InterruptedException {
+        int limit = 20; // you can change the limit
+        int numThreads = 4; // number of threads
+        int range = (limit + numThreads - 1) / numThreads; // range for each thread
+
+        PrimeSumThread[] threads = new PrimeSumThread[numThreads];
+
+        // Create and start threads
+        for (int i = 0; i < numThreads; i++) {
+            int start = i * range + 1;
+            int end = Math.min((i + 1) * range, limit);
+            threads[i] = new PrimeSumThread(start, end);
+            threads[i].start();
+        }
+
+        // Wait for threads to finish and calculate total sum
+        int totalSum = 0;
+        for (PrimeSumThread t : threads) {
+            t.join();
+            totalSum += t.getSum();
+        }
+
+        System.out.println("Sum of prime numbers up to " + limit + " is: " + totalSum);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Sum of prime numbers up to 20 is: 77
+  </pre>
+</div>
+
+ <div class="query-section" id="m6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+
+class WebCrawlerThread extends Thread {
+    private String website;
+
+    public WebCrawlerThread(String website) {
+        this.website = website;
+    }
+
+    public void run() {
+        System.out.println("Crawling: " + website);
+        try {
+            URL url = new URL(website);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String inputLine;
+            StringBuilder content = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine).append("\n");
+            }
+
+            in.close();
+
+            // Print first 200 characters of the content
+            System.out.println("Content preview of " + website + ":\n" + 
+                               content.substring(0, Math.min(200, content.length())) + "\n");
+
+        } catch (Exception e) {
+            System.out.println("Error crawling " + website + ": " + e.getMessage());
+        }
+    }
+}
+
+public class ConcurrentWebCrawler {
+    public static void main(String[] args) throws InterruptedException {
+        String[] websites = {
+            "https://www.example.com",
+            "https://www.wikipedia.org",
+            "https://www.oracle.com"
+        };
+
+        Thread[] threads = new Thread[websites.length];
+
+        // Create and start threads
+        for (int i = 0; i < websites.length; i++) {
+            threads[i] = new WebCrawlerThread(websites[i]);
+            threads[i].start();
+        }
+
+        // Wait for all threads to finish
+        for (Thread t : threads) {
+            t.join();
+        }
+
+        System.out.println("Crawling completed.");
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Crawling: https://www.example.com
+Crawling: https://www.wikipedia.org
+Crawling: https://www.oracle.com
+Content preview of https://www.example.com:
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+    ...
+
+Content preview of https://www.wikipedia.org:
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+...
+
+Content preview of https://www.oracle.com:
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+...
+
+Crawling completed.
+  </pre>
+</div>
+
+ <div class="query-section" id="m7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+class BankAccount {
+    private int balance;
+
+    public BankAccount(int initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    // Synchronized deposit method
+    public synchronized void deposit(int amount) {
+        balance += amount;
+        System.out.println(Thread.currentThread().getName() + " deposited " + amount + 
+                           ", New Balance: " + balance);
+    }
+
+    // Synchronized withdraw method
+    public synchronized void withdraw(int amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println(Thread.currentThread().getName() + " withdrew " + amount + 
+                               ", New Balance: " + balance);
+        } else {
+            System.out.println(Thread.currentThread().getName() + " attempted to withdraw " + 
+                               amount + ", but Insufficient Balance: " + balance);
+        }
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+}
+
+class DepositThread extends Thread {
+    private BankAccount account;
+    private int amount;
+
+    public DepositThread(BankAccount account, int amount) {
+        this.account = account;
+        this.amount = amount;
+    }
+
+    public void run() {
+        account.deposit(amount);
+    }
+}
+
+class WithdrawThread extends Thread {
+    private BankAccount account;
+    private int amount;
+
+    public WithdrawThread(BankAccount account, int amount) {
+        this.account = account;
+        this.amount = amount;
+    }
+
+    public void run() {
+        account.withdraw(amount);
+    }
+}
+
+public class BankAccountConcurrentExample {
+    public static void main(String[] args) throws InterruptedException {
+        BankAccount account = new BankAccount(1000);
+
+        Thread t1 = new DepositThread(account, 500);
+        Thread t2 = new WithdrawThread(account, 300);
+        Thread t3 = new WithdrawThread(account, 800);
+        Thread t4 = new DepositThread(account, 200);
+
+        // Start threads
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+
+        // Wait for threads to finish
+        t1.join();
+        t2.join();
+        t3.join();
+        t4.join();
+
+        System.out.println("Final Balance: " + account.getBalance());
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Thread-0 deposited 500, New Balance: 1500
+Thread-1 withdrew 300, New Balance: 1200
+Thread-2 withdrew 800, New Balance: 400
+Thread-3 deposited 200, New Balance: 600
+Final Balance: 600
+  </pre>
+</div>
+
+ <div class="query-section" id="m8">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+class MyRunnable implements Runnable {
+    private String threadName;
+
+    public MyRunnable(String threadName) {
+        this.threadName = threadName;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(threadName + " is running.");
+    }
+}
+
+public class RunnableThreadsExample {
+    public static void main(String[] args) {
+        // Create Runnable instances
+        Runnable r1 = new MyRunnable("Thread 1");
+        Runnable r2 = new MyRunnable("Thread 2");
+        Runnable r3 = new MyRunnable("Thread 3");
+
+        // Create Thread objects and start them
+        Thread t1 = new Thread(r1);
+        Thread t2 = new Thread(r2);
+        Thread t3 = new Thread(r3);
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Thread 1 is running.
+Thread 2 is running.
+Thread 3 is running.
+  </pre>
+</div>
+
+ <div class="query-section" id="m9">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+class MyThread extends Thread {
+    private String threadName;
+
+    public MyThread(String threadName) {
+        this.threadName = threadName;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(threadName + " is running.");
+    }
+}
+
+public class ThreadClassExample {
+    public static void main(String[] args) {
+        // Create thread instances
+        MyThread t1 = new MyThread("Thread 1");
+        MyThread t2 = new MyThread("Thread 2");
+        MyThread t3 = new MyThread("Thread 3");
+
+        // Start threads
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Thread 1 is running.
+Thread 2 is running.
+Thread 3 is running.
+  </pre>
+</div>
+
+ <div class="query-section" id="m10">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+class MyThread extends Thread {
+    public MyThread(String name) {
+        super(name); // Set thread name
+    }
+
+    @Override
+    public void run() {
+        System.out.println(getName() + " is running with priority " + getPriority());
+    }
+}
+
+public class ThreadNamePriorityExample {
+    public static void main(String[] args) {
+        // Create threads with names
+        MyThread t1 = new MyThread("Thread-A");
+        MyThread t2 = new MyThread("Thread-B");
+        MyThread t3 = new MyThread("Thread-C");
+
+        // Set priorities
+        t1.setPriority(Thread.MIN_PRIORITY); // 1
+        t2.setPriority(Thread.NORM_PRIORITY); // 5
+        t3.setPriority(Thread.MAX_PRIORITY); // 10
+
+        // Start threads
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Thread-A is running with priority 1
+Thread-B is running with priority 5
+Thread-C is running with priority 1
+  </pre>
+</div>
+
+        </div>
+    </div>
+
+   <div class="footer-container">
+        <footer>
+         <p>Created by <span>Gurleen Kaur Dhaliwal</span> | BCA 5 Sem. | Roll No: <span>4003/23</span></p>
+        </footer>
+    </div>
+</body>
+</html>

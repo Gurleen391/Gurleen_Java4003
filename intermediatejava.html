@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #1c1f24;
+        color: #e0e0e0;
+        min-height: 100vh;
+        padding-top: 80px;
+        box-sizing: border-box;
+    }
+
+    /* HEADER */
+    header {
+        background: #2a2f38;
+        color: #00ffff;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 15px rgba(0, 255, 255, 0.3);
+    }
+/* ---------- LOGO CONTAINER ---------- */
+.logo-container {
+  display: flex;              /* Align image and text in a row */
+  align-items: center;        /* Vertically center them */
+  gap: 10px;                  /* Add space between logo and text */
+}
+
+.logo-container img {
+  width: 40px;                /* Logo width */
+  height: 40px;               /* Logo height */
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.6)); /* Cyan glow effect */
+}
+
+.logo-container h1 {
+  color: #00ffff;             /* Text color (cyan) */
+  font-size: 1.8rem;          /* Font size */
+  letter-spacing: 1px;        /* Slight spacing between letters */
+}
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        margin: 0;
+    }
+
+    nav ul li {
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        color: #00ffff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+	/* Soft white, underlined question links for 6 table-of-contents sections */
+#table-of-contents1 ul li a,
+#table-of-contents2 ul li a,
+#table-of-contents3 ul li a,
+#table-of-contents4 ul li a,
+#table-of-contents5 ul li a,
+#table-of-contents6 ul li a {
+    color: #f5f5f5 !important; /* soft white */
+    text-decoration: underline;
+    text-decoration-color: #f5f5f5;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect: soft cyan glow */
+#table-of-contents1 ul li a:hover,
+#table-of-contents2 ul li a:hover,
+#table-of-contents3 ul li a:hover,
+#table-of-contents4 ul li a:hover,
+#table-of-contents5 ul li a:hover,
+#table-of-contents6 ul li a:hover {
+    color: #00ffff !important;
+    text-decoration-color: #00ffff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+
+
+    nav ul li a:hover {
+        color: #f0a500;
+    }
+
+    /* SIDEBAR */
+    .container {
+        display: flex;
+        flex-grow: 1;
+        margin-top: 0px;
+    }
+
+    .sidebar {
+        width: 220px;
+        background: #1a1d22;
+        color: #e0e0e0;
+        padding: 20px;
+        height: 85vh;
+        overflow-y: auto;
+        margin-top: 40px;
+        left: 0;
+        z-index: 999;
+        border-top: 2px solid #00ffff;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        color: #00ffff;
+        margin-top: 0;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding-left: 20px;
+    }
+
+    .sidebar > ul > li {
+        padding: 12px 10px;
+        margin: 10px 0;
+        border-bottom: 1px solid #00ffff33;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar > ul > li:hover {
+        background-color: #00ffff;
+        color: #1c1f24;
+        transform: translateX(5px);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    .sidebar ul .sub-menu {
+        padding-left: 30px;
+    }
+
+    .sidebar ul .sub-menu li {
+        list-style-type: circle;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    .sidebar ul li a {
+        color: #e0e0e0;
+        text-decoration: none;
+        display: block;
+    }
+
+    .sidebar ul li a:hover {
+        background: #00ffff;
+        padding-left: 10px;
+        color: #1c1f24;
+        border-radius: 5px;
+    }
+
+    .sub-menu {
+        display: none;
+        padding-left: 30px;
+    }
+
+    .sub-menu.active {
+        display: block;
+    }
+
+    /* CONTENT */
+    .content {
+        margin-left: 0px;
+        padding: 50px 50px;
+        flex-grow: 1;
+        margin-top: 40px;
+    }
+
+    .query-section {
+        background-color: #2a2f38;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 5px solid #00ffff;
+        margin-bottom: 30px;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    }
+
+    .query-section h3 {
+        color: #00ffff;
+        margin-bottom: 10px;
+    }
+
+    .query-section p {
+        font-size: 16px;
+        color: #cfd8dc;
+        line-height: 1.6;
+        word-spacing: 2px;
+        letter-spacing: 1px;
+    }
+
+    pre {
+        background-color: #1c1f24;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border-left: 4px solid #00ffff;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        border-radius: 5px;
+        overflow-x: auto;
+        color: #e0e0e0;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+    }
+
+    /* BUTTONS */
+    .back-btn {
+        background-color: #00ffff;
+        color: #1c1f24;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        font-weight: 600;
+    }
+
+    .back-btn:hover {
+        background-color: #f0a500;
+        color: #1c1f24;
+        transform: translateY(-2px);
+        box-shadow: 0 0 10px rgba(240, 165, 0, 0.3);
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 10px;
+        background: #2a2f38;
+        color: #888;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: auto;
+        border-top: 1px solid #00ffff;
+        box-shadow: 0 -2px 10px rgba(0, 255, 255, 0.1);
+    }
+
+    footer span {
+        color: #00ffff;
+        font-weight: bold;
+    }
+
+
+    /* TABLE OF CONTENTS */
+    #table-of-contents ul li a {
+        text-decoration: none !important;
+        color: #00ffff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    #table-of-contents ul li a:hover {
+        color: #f0a500;
+    }
+
+    /* FULLSCREEN AREA */
+    .fullscreen {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #1a1d22;
+        z-index: 10;
+        overflow: auto;
+    }
+</style>
+
+
+    <script>
+        function toggleSubmenu(id) {
+            var submenu = document.getElementById(id);
+            submenu.classList.toggle("active");
+        }
+
+        function showContent(sectionId) {
+            var sections = document.querySelectorAll('.query-section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            var selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var sections = document.querySelectorAll('.query-section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+                showContent('welcome-section');
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+       <div class="logo-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java Logo">
+      <h1>JAVA</h1>
+    </div>
+        <nav>
+            <ul>
+                <li><a href="homejava.html">Home</a></li>
+                <li><a href="corejava.html">Core Java</a></li>
+                <li><a href="intermediatejava.html">Intermediate Java</a></li>
+                <li><a href="advancejava.html">Advance Java</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>Index</h2>
+            <ul>               
+                <li onclick="showContent('table-of-contents1')" class="menu-item" style="display: flex; align-items: center;">        
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/database-8291121-6880412.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                Exception
+                </li>
+
+                <li onclick="showContent('table-of-contents2')" class="menu-item" style="display: flex; align-items: center;">        
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/control-78-204010.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                Data Conversion
+                </li>
+                
+                <li onclick="showContent('table-of-contents3')" class="menu-item" style="display: flex; align-items: center;">        
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/query-4874298-4053010.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                I/O
+                </li>
+
+                <li onclick="showContent('table-of-contents4')" class="menu-item" style="display: flex; align-items: center;">        
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/stored-procedure-4874226-4053023.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                GUI (AWT)
+                </li>
+
+                <li onclick="showContent('table-of-contents5')" class="menu-item" style="display: flex; align-items: center;">        
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/exception-5245737-4376844.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                Delegation Event Model
+                </li>
+
+                <li onclick="showContent('table-of-contents6')" class="menu-item" style="display: flex; align-items: center;">        
+                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/packages-9090268-7404604.png?f=webp&w=256"  style="width: 20px; height: 20px; margin-left: -9px; margin-right:16px; vertical-align:middle;">
+                Applets
+                </li>
+            </ul>
+        </div>
+
+        <div class="content">
+
+<div id="welcome-section" class="query-section" style="top: 180px; left: 450px; width: 100%; height: 500px;">
+    <h2>Intermediate Java</h2>
+
+    <p>It focuses on concepts that enhance your programming skills which are essential for the Java applications and prepare for real-world programming challenges.</p>
+</div>
+
+<div class="query-section" id="table-of-contents1">
+    <h3>Exception:</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('e1')">1. Write a Java program that throws an exception and catch it using a try-catch block.</a></li>
+        <li><a href="#" onclick="showContent('e2')">2. Write a Java program to create a method that reads a file and throws an exception if the file is not found</a></li>
+        <li><a href="#" onclick="showContent('e3')">3. Program that reads a list of numbers from a file and throws an exception if any of the numbers are positive</a></li>
+        <li><a href="#" onclick="showContent('e4')">4. Write a Java program that reads a file and throws an exception if the file is empty.</a></li>
+        <li><a href="#" onclick="showContent('e5')">5. Program that reads a list of integers from the user and throws an exception if any numbers are duplicates</a></li>
+        <li><a href="#" onclick="showContent('e6')">6. Program to create a method that takes a string as input and throws an exception if the string does not contain vowels.</a></li>
+        <li><a href="#" onclick="showContent('e7')">7. Program to manage the driver with path, username and password, if not successful then throw an exception</a></li>
+        <li><a href="#" onclick="showContent('e8')">8. Write a Java program to show an example of throws Keyword.</a></li>
+        <li><a href="#" onclick="showContent('e9')">9. Write a Java program to show an example of multiple catch</a></li>
+        <li><a href="#" onclick="showContent('e10')">10. Write a Java program to show an example of nested try block.</a></li>
+</ul>
+</div>
+
+<div class="query-section" id="table-of-contents2">
+    <h3>Data Conversion:</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('d1')">1. How to convert String to int</a></li>
+        <li><a href="#" onclick="showContent('d2')">2. How to convert int to String</a></li>
+        <li><a href="#" onclick="showContent('d3')">3. How to convert String to long</a></li>
+        <li><a href="#" onclick="showContent('d4')">4. How to convert long to String</a></li>
+        <li><a href="#" onclick="showContent('d5')">5. How to convert String to float</a></li>
+        <li><a href="#" onclick="showContent('d6')">6. How to convert float to String</a></li>
+        <li><a href="#" onclick="showContent('d7')">7. How to convert String to double</a></li>
+        <li><a href="#" onclick="showContent('d8')">8. How to convert double to String</a></li>
+        <li><a href="#" onclick="showContent('d9')">9. How to convert String to Date</a></li>
+        <li><a href="#" onclick="showContent('d10')">10. How to convert Date to String</a></li>
+        <li><a href="#" onclick="showContent('d11')">11. How to convert String to char</a></li>
+        <li><a href="#" onclick="showContent('d12')">12. How to convert char to String</a></li>
+        <li><a href="#" onclick="showContent('d13')">13. How to convert String to Object</a></li>
+        <li><a href="#" onclick="showContent('d14')">14. How to convert Object to String</a></li>
+        <li><a href="#" onclick="showContent('d15')">15. How to convert int to long</a></li>
+        <li><a href="#" onclick="showContent('d16')">16. How to convert long to int</a></li>
+        <li><a href="#" onclick="showContent('d17')">17. How to convert int to double</a></li>
+        <li><a href="#" onclick="showContent('d18')">18. How to convert double to int</a></li>
+</ul>
+</div>
+
+<div class="query-section" id="table-of-contents3">
+    <h3>Input/Output:</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('i1')">1. Enter the character from user using InputStreamReader</a></li>
+        <li><a href="#" onclick="showContent('i2')">2. Enter the string from user using BufferedStreamReader</a></li>
+        <li><a href="#" onclick="showContent('i3')">3. Enter the integer from user using Scanner class</a></li>
+        <li><a href="#" onclick="showContent('i4')">4. Enter the float from user using Scanner class</a></li>
+        <li><a href="#" onclick="showContent('i5')">5. Enter the double from user using Scanner class</a></li>
+        <li><a href="#" onclick="showContent('i6')">6. Enter the boolean from user using Scanner class</a></li>
+        <li><a href="#" onclick="showContent('i7')">7. Enter the short integer from user using Scanner class</a></li>
+</ul>
+</div>
+
+<div class="query-section" id="table-of-contents4">
+    <h3>Graphical User Interface (AWT):</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('g1')">1. Create a simple AWT application that displays a button with FlowLayout manager.</a></li>
+        <li><a href="#" onclick="showContent('g2')">2. Create a simple AWT application that displays a button with Custom Layout.</a></li>
+        <li><a href="#" onclick="showContent('g3')">3. Create a simple AWT application that displays a TextField with FlowLayout manager.</a></li>
+        <li><a href="#" onclick="showContent('g4')">4. Create a simple AWT application that displays a TextField with Custom Layout.</a></li>
+        <li><a href="#" onclick="showContent('g5')">5. Create a simple AWT application that displays a Checkbox with FlowLayout manager.</a></li>
+        <li><a href="#" onclick="showContent('g6')">6. Create a simple AWT application that displays a Checkbox with Custom Layout.</a></li>
+        <li><a href="#" onclick="showContent('g7')">7. Create a simple AWT application that displays a Label with FlowLayout manager.</a></li>
+        <li><a href="#" onclick="showContent('g8')">8. Create a simple AWT application that displays a Label with Custom Layout.</a></li>
+        <li><a href="#" onclick="showContent('g9')">9. Create a simple AWT application that displays a Choice with FlowLayout manager.</a></li>
+        <li><a href="#" onclick="showContent('g10')">10. Create a simple AWT application that displays a Choice with Custom Layout.</a></li>
+</ul>
+</div>
+
+<div class="query-section" id="table-of-contents5">
+    <h3>Delegation Event Model:</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('de1')">1. Java Program to Display Some Text in the Frame using Labels</a></li>
+        <li><a href="#" onclick="showContent('de2')">2. Java Program to Create Text Area and Password Field</a></li>
+        <li><a href="#" onclick="showContent('de3')">3. Java Program to Create a Button and Display Image in the Frame when Clicked</a></li>
+        <li><a href="#" onclick="showContent('de4')">4. Java Program to Create 2 Radio Buttons and Display Selected Button Label</a></li>
+        <li><a href="#" onclick="showContent('de5')">5. Java Program to Handle KeyBoardEvent</a></li>
+        <li><a href="#" onclick="showContent('de6')">6. Java Program to Handle MouseEvent</a></li>
+        <li><a href="#" onclick="showContent('de7')">7. Java Program to Get and Set State and Get Label of a Check Box</a></li>
+        <li><a href="#" onclick="showContent('de8')">8. Java Program to Create Check Boxes and Radio Buttons</a></li>
+        <li><a href="#" onclick="showContent('de9')">9. Java Program to Create and Switch between Frames using Buttons</a></li>
+        <li><a href="#" onclick="showContent('de10')">10. Java Program to Create and Set Border to Push Buttons</a></li>
+</ul>
+</div>
+
+<div class="query-section" id="table-of-contents6">
+    <h3>Applets:</h3>
+    <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+        <li><a href="#" onclick="showContent('a1')">1. Create an applet showing the string "Hello World" which is embedded in the HTML page</a></li>
+        <li><a href="#" onclick="showContent('a2')">2. Create an applet showing the string "Hello World" which is executed by an appletviewer.</a></li>
+        <li><a href="#" onclick="showContent('a3')">3. Create an applet in Java to draw a circle.</a></li>
+        <li><a href="#" onclick="showContent('a4')">4. Create an applet in Java to draw a polygon.</a></li>
+        <li><a href="#" onclick="showContent('a5')">5. Create an applet in Java to draw a rectangle.</a></li>
+        <li><a href="#" onclick="showContent('a6')">6. Create an applet in Java to draw a square.</a></li>
+        <li><a href="#" onclick="showContent('a7')">7. Create an applet in Java to draw a 4 concentric circles.</a></li>
+        <li><a href="#" onclick="showContent('a8')">8. Create an applet in Java to draw a line.</a></li>
+        <li><a href="#" onclick="showContent('a9')">9. Create an applet in Java to draw a oval.</a></li>
+        <li><a href="#" onclick="showContent('a10')">10. Create an applet in Java to draw a arc.</a></li>
+</ul>
+</div>
+
+
+
+ <div class="query-section" id="e1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+class ExceptionExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        int a = sc.nextInt();
+        System.out.print("Enter second number: ");
+        int b = sc.nextInt();
+        try {
+            int result = a / b;  // may throw ArithmeticException
+            System.out.println("Result: " + result);
+        } 
+        catch (ArithmeticException e) {
+            System.out.println("Exception caught: Division by zero is not allowed.");
+        }
+        System.out.println("Program continues after exception handling.");       
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter first number: 20
+Enter second number: 0
+Exception caught: Division by zero is not allowed.
+Program continues after exception handling.
+  </pre>
+</div>
+
+ <div class="query-section" id="e2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.io.*;
+class FileReaderExample {
+    // Method that reads a file and throws an exception if not found
+    static void readFile(String fileName) throws FileNotFoundException {
+        FileReader file = new FileReader(fileName);
+        BufferedReader reader = new BufferedReader(file);
+        try {
+            String line;
+            System.out.println("File content:");
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } 
+        catch (IOException e) {
+            System.out.println("Error reading the file.");
+        } 
+        finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                System.out.println("Error closing the file.");
+            }
+        }
+    }
+    public static void main(String[] args) {
+        try {
+            // Try to read a file named "data.txt"
+            readFile("data.txt");
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("Exception caught: File not found!");
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Exception caught: File not found!
+  </pre>
+</div>
+
+ <div class="query-section" id="e3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.io.*;
+import java.util.*;
+class PositiveNumberException extends Exception {
+    public PositiveNumberException(String message) {
+        super(message);
+    }
+}
+class ReadNumbersFromFile {
+    // Method to read numbers and throw exception if any number is positive
+    static void readNumbers(String fileName) throws IOException, PositiveNumberException {
+        File file = new File(fileName);
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            if (sc.hasNextInt()) {
+                int num = sc.nextInt();
+                if (num > 0) {
+                    sc.close();
+                    throw new PositiveNumberException("Positive number found: " + num);
+                }
+            } else {
+                sc.next(); // skip non-integer tokens
+            }
+        }
+        System.out.println("All numbers are non-positive.");
+        sc.close();
+    }
+    public static void main(String[] args) {
+        try {
+            // Try to read from "numbers.txt"
+            readNumbers("numbers.txt");
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("Error: File not found!");
+        } 
+        catch (PositiveNumberException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        } 
+        catch (IOException e) {
+            System.out.println("An input/output error occurred.");
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Exception caught: Positive number found: 3
+  </pre>
+</div>
+
+ <div class="query-section" id="e4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.io.*;
+// Custom exception class
+class EmptyFileException extends Exception {
+    public EmptyFileException(String message) {
+        super(message);
+    }
+}
+class FileCheckExample {
+    // Method to read file and throw exception if empty
+    static void readFile(String fileName) throws IOException, EmptyFileException {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found: " + fileName);
+        }
+        if (file.length() == 0) {
+            throw new EmptyFileException("The file is empty.");
+        }
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        System.out.println("File content:");
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        reader.close();
+    }
+    public static void main(String[] args) {
+        try {
+            // Try to read "data.txt"
+            readFile("data.txt");
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("Error: " + e.getMessage());
+        } 
+        catch (EmptyFileException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        } 
+        catch (IOException e) {
+            System.out.println("An I/O error occurred.");
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Exception caught: The file is empty.
+  </pre>
+</div>
+
+ <div class="query-section" id="e5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.util.*;
+// Custom exception class
+class DuplicateNumberException extends Exception {
+    public DuplicateNumberException(String message) {
+        super(message);
+    }
+}
+class DuplicateCheckExample {
+    // Method to check for duplicates
+    static void checkDuplicates(List<Integer> numbers) throws DuplicateNumberException {
+        Set<Integer> uniqueNumbers = new HashSet<>();
+        for (int num : numbers) {
+            if (!uniqueNumbers.add(num)) {  // add() returns false if num already exists
+                throw new DuplicateNumberException("Duplicate number found: " + num);
+            }
+        }
+        System.out.println("No duplicates found. All numbers are unique.");
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Integer> numbers = new ArrayList<>();
+        System.out.print("Enter how many numbers you want to input: ");
+        int count = sc.nextInt();
+        System.out.println("Enter " + count + " integers:");
+        for (int i = 0; i < count; i++) {
+            numbers.add(sc.nextInt());
+        }
+        try {
+            checkDuplicates(numbers);
+        } 
+        catch (DuplicateNumberException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter how many numbers you want to input: 5
+Enter 5 integers:
+1 2 3 4 5
+No duplicates found. All numbers are unique.
+  </pre>
+</div>
+
+ <div class="query-section" id="e6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.util.*;
+// Custom exception class
+class NoVowelException extends Exception {
+    public NoVowelException(String message) {
+        super(message);
+    }
+}
+class VowelCheckExample {
+    // Method to check for vowels
+    static void checkVowels(String text) throws NoVowelException {
+        String lowerText = text.toLowerCase();
+        boolean hasVowel = false;
+        for (char ch : lowerText.toCharArray()) {
+            if ("aeiou".indexOf(ch) != -1) {
+                hasVowel = true;
+                break;
+            }
+        }
+        if (!hasVowel) {
+            throw new NoVowelException("The string does not contain any vowels.");
+        }
+        System.out.println("The string contains vowels.");
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+        try {
+            checkVowels(input);
+        } 
+        catch (NoVowelException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a string: Hello
+The string contains vowels.
+  </pre>
+</div>
+
+ <div class="query-section" id="e7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+// Custom exception class
+class DriverException extends Exception {
+    public DriverException(String message) {
+        super(message);
+    }
+}
+class DriverManagerExample {
+    // Method to simulate driver connection
+    static void connectDriver(String path, String username, String password) throws DriverException {
+        // Simulated correct credentials and path
+        String correctPath = "/usr/local/driver";
+        String correctUsername = "admin";
+        String correctPassword = "pass123";
+        if (!path.equals(correctPath) || !username.equals(correctUsername) || !password.equals(correctPassword)) {
+            throw new DriverException("Connection failed! Invalid path, username, or password.");
+        }
+        System.out.println("Driver connected successfully!");
+    }
+    public static void main(String[] args) {
+        // Test values (you can also use Scanner to get input from user)
+        String path = "/usr/local/driver";
+        String username = "admin";
+        String password = "wrongpass"; // Wrong password to trigger exception
+        try {
+            connectDriver(path, username, password);
+        } 
+        catch (DriverException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Exception caught: Connection failed! Invalid path, username, or password.
+  </pre>
+</div>
+
+ <div class="query-section" id="e8">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.io.*;
+// Class to demonstrate throws keyword
+class ThrowsExample {
+    // Method that reads a file and declares it throws FileNotFoundException
+    static void readFile(String fileName) throws FileNotFoundException {
+        FileReader file = new FileReader(fileName); // May throw FileNotFoundException
+        System.out.println("File opened successfully: " + fileName);
+    }
+    public static void main(String[] args) {
+        try {
+            // Call the method that declares "throws"
+            readFile("data.txt");
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("Exception caught: File not found!");
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+File opened successfully: data.txt
+  </pre>
+</div>
+
+ <div class="query-section" id="e9">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.util.*;
+class MultipleCatchExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.print("Enter an integer: ");
+            int num = sc.nextInt();
+            int result = 100 / num; // May throw ArithmeticException
+            System.out.println("Result of 100 / " + num + " = " + result
+            int[] arr = new int[3];
+            arr[5] = num; // May throw ArrayIndexOutOfBoundsException
+        }
+        catch (ArithmeticException e) {
+            System.out.println("ArithmeticException caught: Cannot divide by zero.");
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException caught: Invalid array index.");
+        }
+        catch (InputMismatchException e) {
+            System.out.println("InputMismatchException caught: Please enter a valid integer.");
+        }
+        System.out.println("Program continues after exception handling.");
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter an integer: 0
+ArithmeticException caught: Cannot divide by zero.
+Program continues after exception handling.
+  </pre>
+</div>
+
+ <div class="query-section" id="e10">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents1')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+class NestedTryExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.print("Enter the size of the array: ");
+            int size = sc.nextInt();
+            int[] arr = new int[size];
+            try {
+                System.out.print("Enter an index to store value: ");
+                int index = sc.nextInt();
+                System.out.print("Enter a number to store at index " + index + ": ");
+                int num = sc.nextInt();
+                arr[index] = num; // May throw ArrayIndexOutOfBoundsException
+                System.out.println("Value stored successfully at index " + index);
+            } 
+            catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Inner catch: Invalid array index.");
+            }
+            // Division operation in outer try
+            System.out.print("Enter a number to divide 100 by: ");
+            int divisor = sc.nextInt();
+            int result = 100 / divisor; // May throw ArithmeticException
+            System.out.println("Result: " + result);
+        } 
+        catch (ArithmeticException e) {
+            System.out.println("Outer catch: Cannot divide by zero.");
+        } 
+        catch (InputMismatchException e) {
+            System.out.println("Outer catch: Invalid input type.");
+        }
+        System.out.println("Program continues after nested try-catch blocks.");
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter the size of the array: 3
+Enter an index to store value: 5
+Enter a number to store at index 5: 10
+Inner catch: Invalid array index.
+Enter a number to divide 100 by: 5
+Result: 20
+Program continues after nested try-catch blocks.
+  </pre>
+</div>
+
+ <div class="query-section" id="d1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class StringToIntScanner {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt(); // no need to parse
+        System.out.println("You entered: " + number);
+        System.out.println("After adding 10: " + (number + 10));
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a number: 40
+You entered: 40
+After adding 10: 50
+  </pre>
+</div>
+
+ <div class="query-section" id="d2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class IntToStringExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter an integer: ");
+        int num = sc.nextInt();
+        // Method 1: Using String.valueOf()
+        String str = String.valueOf(num);
+        System.out.println("Integer value: " + num);
+        System.out.println("String value: " + str);
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter an integer: 42
+Integer value: 42
+String value: 42
+  </pre>
+</div>
+
+ <div class="query-section" id="d3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class StringToLongExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a long number: ");
+        String input = sc.nextLine();
+        try {
+            // Method 1: Using Long.parseLong()
+            long num = Long.parseLong(input);
+            System.out.println("String value: " + input);
+            System.out.println("Converted long value: " + num);
+        } 
+        catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a valid long number.");
+        }
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a long number: 1234567890123
+String value: 1234567890123
+Converted long value: 1234567890123
+  </pre>
+</div>
+
+ <div class="query-section" id="d4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class LongToStringExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a long number: ");
+        long num = sc.nextLong();
+        // Convert long to String using String.valueOf()
+        String str = String.valueOf(num);
+        System.out.println("Long value: " + num);
+        System.out.println("String value: " + str);
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a long number: 1234567890123
+Long value: 1234567890123
+String value: 1234567890123
+  </pre>
+</div>
+
+ <div class="query-section" id="d5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class StringToFloatExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a float number: ");
+        String input = sc.nextLine();
+        try {
+            float num = Float.parseFloat(input);
+            System.out.println("Converted float: " + num);
+        } 
+        catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a valid float.");
+        }
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a float number: 45.67
+Converted float: 45.67
+  </pre>
+</div>
+
+ <div class="query-section" id="d6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class FloatToStringExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a float number: ");
+        float num = sc.nextFloat();
+        // Method 1: Using String.valueOf()
+        String str = String.valueOf(num);
+        System.out.println("Float value: " + num);
+        System.out.println("String value: " + str);
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a float number: 45.67
+Float value: 45.67
+String value: 45.67
+  </pre>
+</div>
+
+ <div class="query-section" id="d7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class StringToDoubleExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a double number: ");
+        String input = sc.nextLine();
+        try {
+            double num = Double.parseDouble(input);
+            System.out.println("Converted double: " + num);
+        } 
+        catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a valid double number.");
+        }
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a double number: 78.91
+Converted double: 78.91
+  </pre>
+</div>
+
+ <div class="query-section" id="d8">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class DoubleToStringExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a double number: ");
+        double num = sc.nextDouble();
+        // Method 1: Using String.valueOf()
+        String str = String.valueOf(num);
+        System.out.println("Double value: " + num);
+        System.out.println("String value: " + str);
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a double number: 123.45
+Double value: 123.45
+String value: 123.45
+  </pre>
+</div>
+
+ <div class="query-section" id="d9">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
+public class StringToDateExample {
+    public static void main(String[] args) {
+        String dateStr = "23-10-2025"; // Example date
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date date = formatter.parse(dateStr);
+            System.out.println("String: " + dateStr);
+            System.out.println("Date: " + date);
+        } 
+        catch (ParseException e) {
+            System.out.println("Invalid date format!");
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+String: 23-10-2025
+Date: Thu Oct 23 00:00:00 IST 2025
+  </pre>
+</div>
+
+ <div class="query-section" id="d10">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+import java.text.SimpleDateFormat;
+import java.util.Date;
+public class DateToStringExample {
+    public static void main(String[] args) {
+        // Create a Date object
+        Date date = new Date();
+        // Define the date format
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        // Convert Date to String
+        String strDate = formatter.format(date);
+        System.out.println("Date as String: " + strDate);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Date as String: 23/10/2025 20:15:42
+  </pre>
+</div>
+
+ <div class="query-section" id="d11">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class StringToCharArrayExample {
+    public static void main(String[] args) {
+        String str = "Hello";
+        char[] charArray = str.toCharArray();
+        System.out.println("Characters in the string:");
+        for (char ch : charArray) {
+            System.out.println(ch);
+        }
+    }
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Characters in the string:
+H
+e
+l
+l
+o
+  </pre>
+</div>
+
+ <div class="query-section" id="d12">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class CharToStringExample {
+    public static void main(String[] args) {
+        char ch = 'A';
+        String str = String.valueOf(ch);
+        System.out.println("String: " + str);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+String: A
+  </pre>
+</div>
+
+ <div class="query-section" id="d13">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class StringToObjectExample {
+    public static void main(String[] args) {
+        String str = "Hello";
+        Object obj = (Object) str;  // Explicit casting
+        System.out.println("Object: " + obj);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Object: Hello
+  </pre>
+</div>
+
+ <div class="query-section" id="d14">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class ObjectToStringExample {
+    public static void main(String[] args) {
+        Object obj = 123;  // could be any Object
+        String str = obj.toString();
+        System.out.println("String: " + str);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+String: 123
+  </pre>
+</div>
+
+ <div class="query-section" id="d15">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class IntToLongExample {
+    public static void main(String[] args) {
+        int num = 100;
+        long longNum = num;  // automatically converted
+        System.out.println("Long value: " + longNum);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Long value: 100
+  </pre>
+</div>
+
+ <div class="query-section" id="d16">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class LongToIntExample {
+    public static void main(String[] args) {
+        long longNum = 100L;
+        int intNum = (int) longNum;  // explicit casting
+        System.out.println("Int value: " + intNum);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Int value: 100
+  </pre>
+</div>
+
+ <div class="query-section" id="d17">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class IntToDoubleExample {
+    public static void main(String[] args) {
+        int num = 42;
+        double doubleNum = num;  // automatic conversion
+        System.out.println("Double value: " + doubleNum);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Double value: 42.0
+  </pre>
+</div>
+
+ <div class="query-section" id="d18">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents2')">Back</button>
+  </div>
+  <pre>
+public class DoubleToIntExample {
+    public static void main(String[] args) {
+        double d = 42.99;
+        int num = (int) d;  // explicit casting
+        System.out.println("Int value: " + num);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Int value: 42
+  </pre>
+</div>
+
+ <div class="query-section" id="i1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents3')">Back</button>
+  </div>
+  <pre>
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+public class ReadCharExample {
+    public static void main(String[] args) {
+        try {
+            // Create InputStreamReader and BufferedReader
+            InputStreamReader isr = new InputStreamReader(System.in);
+            BufferedReader br = new BufferedReader(isr);
+            System.out.print("Enter a character: ");
+            // Read a line from the user
+            String input = br.readLine();
+            // Get the first character
+            char ch = input.charAt(0);
+            System.out.println("You entered: " + ch);
+        } catch (IOException e) {
+            System.out.println("Error reading input: " + e.getMessage());
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a character: A
+You entered: A
+  </pre>
+</div>
+
+ <div class="query-section" id="i2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents3')">Back</button>
+  </div>
+  <pre>
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+public classReadStringExample {
+    public static void main(String[] args) {
+        try {
+            // Create InputStreamReader and BufferedReader
+            InputStreamReader isr = new InputStreamReader(System.in);
+            BufferedReader br = new BufferedReader(isr);
+            System.out.print("Enter a string: ");
+            String input = br.readLine(); // read the whole line
+            System.out.println("You entered: " + input);
+        } catch (IOException e) {
+            System.out.println("Error reading input: " + e.getMessage());
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a string: Hello Java
+You entered: Hello Java
+  </pre>
+</div>
+
+ <div class="query-section" id="i3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents3')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class ReadIntegerExample {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter an integer: ");
+        int num = sc.nextInt(); // read integer from user
+        System.out.println("You entered: " + num);
+        // Close the scanner
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter an integer: 42
+You entered: 42
+  </pre>
+</div>
+
+ <div class="query-section" id="i4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents3')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class ReadFloatExample {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a float number: ");
+        float num = sc.nextFloat(); // read float from user
+        System.out.println("You entered: " + num);
+        // Close the scanner
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a float number: 12.34
+You entered: 12.34
+  </pre>
+</div>
+
+ <div class="query-section" id="i5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents3')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class ReadDoubleExample {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a double number: ");
+        double num = sc.nextDouble(); // read double from user
+        System.out.println("You entered: " + num);
+        // Close the scanner
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a double number: 123.456
+You entered: 123.456
+  </pre>
+</div>
+
+ <div class="query-section" id="i6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents3')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class ReadBooleanExample {
+    public static void main(String[] args) {
+        // Create a Scanner object
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a boolean value (true/false): ");
+        boolean flag = sc.nextBoolean(); // read boolean input
+        System.out.println("You entered: " + flag);
+        // Close the scanner
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a boolean value (true/false): true
+You entered: true
+  </pre>
+</div>
+
+ <div class="query-section" id="i7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents3')">Back</button>
+  </div>
+  <pre>
+import java.util.Scanner;
+public class ReadShortExample {
+    public static void main(String[] args) {
+        // Create a Scanner object
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a short integer: ");
+        short num = sc.nextShort(); // read short input
+        System.out.println("You entered: " + num);
+        // Close the scanner
+        sc.close();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter a short integer: 12345
+You entered: 12345
+  </pre>
+</div>
+
+ <div class="query-section" id="g1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;  
+import java.awt.event.*;
+public class FlowLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT FlowLayout Example");
+        // Set layout as FlowLayout
+        f.setLayout(new FlowLayout());
+        // Create a Button
+        Button b = new Button("Click Me!");
+        // Add the button to the Frame
+        f.add(b);
+        // Set frame size
+        f.setSize(300, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT FlowLayout Example".
+Inside the window, a button labeled "Click Me!" is displayed at the center.
+  </pre>
+</div>
+
+ <div class="query-section" id="g2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class CustomLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT Custom Layout Example");
+        // Disable the default layout manager
+        f.setLayout(null);
+        // Create a Button
+        Button b = new Button("Click Me!");
+        // Set button position (x, y) and size (width, height)
+        b.setBounds(100, 80, 100, 40);
+        // Add the button to the frame
+        f.add(b);
+        // Set frame size
+        f.setSize(300, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT Custom Layout Example".
+Inside the window, a button labeled "Click Me!" is displayed at custom position (100, 80).
+  </pre>
+</div>
+
+ <div class="query-section" id="g3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class TextFieldFlowLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT TextField with FlowLayout");
+        // Set layout to FlowLayout
+        f.setLayout(new FlowLayout());
+        // Create a TextField
+        TextField tf = new TextField(20); // 20 = number of columns
+        // Add TextField to the Frame
+        f.add(tf);
+        // Set frame size
+        f.setSize(300, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT TextField with FlowLayout".
+Inside the window, a TextField (text box) is displayed in the center.
+  </pre>
+</div>
+
+ <div class="query-section" id="g4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class TextFieldCustomLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT TextField with Custom Layout");
+        // Disable layout manager for custom positioning
+        f.setLayout(null);
+        // Create a Label
+        Label l = new Label("Enter your name:");
+        l.setBounds(50, 80, 120, 30);  // x, y, width, height
+        // Create a TextField
+        TextField tf = new TextField();
+        tf.setBounds(180, 80, 120, 30);  // x, y, width, height
+        // Add components to Frame
+        f.add(l);
+        f.add(tf);
+        // Set frame size
+        f.setSize(400, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT TextField with Custom Layout".
+Inside the window, a Label "Enter your name:" and a TextField are displayed at custom positions.
+  </pre>
+</div>
+
+ <div class="query-section" id="g5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class CheckboxFlowLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT Checkbox with FlowLayout");
+        // Set layout to FlowLayout
+        f.setLayout(new FlowLayout());
+        // Create Checkboxes
+        Checkbox c1 = new Checkbox("Java");
+        Checkbox c2 = new Checkbox("Python");
+        Checkbox c3 = new Checkbox("C++");
+        // Add Checkboxes to the Frame
+        f.add(c1);
+        f.add(c2);
+        f.add(c3);
+        // Set frame size
+        f.setSize(300, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT Checkbox with FlowLayout".
+Inside the window, three checkboxes labeled "Java", "Python", and "C++" are displayed in a row.
+  </pre>
+</div>
+
+ <div class="query-section" id="g6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class CheckboxCustomLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT Checkbox with Custom Layout");
+        // Disable layout manager for manual positioning
+        f.setLayout(null);
+        // Create Checkboxe
+        Checkbox c1 = new Checkbox("Java");
+        Checkbox c2 = new Checkbox("Python");
+        Checkbox c3 = new Checkbox("C++");
+        // Set positions and sizes (x, y, width, height)
+        c1.setBounds(50, 80, 100, 30);
+        c2.setBounds(50, 120, 100, 30);
+        c3.setBounds(50, 160, 100, 30);
+        // Add Checkboxes to Frame
+        f.add(c1);
+        f.add(c2);
+        f.add(c3);
+        // Set frame size
+        f.setSize(300, 250);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT Checkbox with Custom Layout".
+Inside the window, three checkboxes labeled "Java", "Python", and "C++" are displayed at custom positions.
+  </pre>
+</div>
+
+ <div class="query-section" id="g7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class LabelFlowLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT Label with FlowLayout");
+        // Set layout to FlowLayout
+        f.setLayout(new FlowLayout());
+        // Create a Label
+        Label l = new Label("Welcome to Java AWT!");
+        // Add Label to the Frame
+        f.add(l);
+        // Set frame size
+        f.setSize(300, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT Label with FlowLayout".
+Inside the window, a label displaying "Welcome to Java AWT!" is shown in the center.
+  </pre>
+</div>
+
+ <div class="query-section" id="g8">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class LabelCustomLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT Label with Custom Layout");
+        // Disable layout manager for manual positioning
+        f.setLayout(null);
+        // Create a Label
+        Label l = new Label("Welcome to Java AWT!");
+        // Set position and size of Label (x, y, width, height)
+        l.setBounds(80, 100, 150, 30);
+        // Add Label to Frame
+        f.add(l);
+        // Set frame size
+        f.setSize(300, 250);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT Label with Custom Layout".
+Inside the window, a label displaying "Welcome to Java AWT!" is shown at a custom position.
+  </pre>
+</div>
+
+ <div class="query-section" id="g9">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class ChoiceFlowLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT Choice with FlowLayout");
+        // Set layout to FlowLayout
+        f.setLayout(new FlowLayout());
+        // Create a Label
+        Label l = new Label("Select your language:");
+        // Create a Choice component (drop-down list)
+        Choice c = new Choice();
+        // Add items to Choice
+        c.add("Java");
+        c.add("Python");
+        c.add("C++");
+        c.add("JavaScript");
+        c.add("C#");
+        // Add components to the Frame
+        f.add(l);
+        f.add(c);
+        // Set frame size
+        f.setSize(300, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT Choice with FlowLayout".
+Inside the window, a label "Select your language:" and a drop-down list with options 
+(Java, Python, C++, JavaScript, C#) are displayed in a row.
+  </pre>
+</div>
+
+ <div class="query-section" id="g10">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents4')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class ChoiceCustomLayoutExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("AWT Choice with Custom Layout");
+        // Disable layout manager for manual positioning
+        f.setLayout(null);
+        // Create a Label
+        Label l = new Label("Select your language:");
+        l.setBounds(50, 50, 150, 30); // x, y, width, height
+        // Create a Choice (drop-down list)
+        Choice c = new Choice();
+        c.setBounds(200, 50, 120, 30); // x, y, width, height
+        // Add items to Choice
+        c.add("Java");
+        c.add("Python");
+        c.add("C++");
+        c.add("JavaScript");
+        c.add("C#");
+        // Add components to Frame
+        f.add(l);
+        f.add(c);
+        // Set frame size
+        f.setSize(400, 200);
+        // Make frame visible
+        f.setVisible(true);
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "AWT Choice with Custom Layout".
+Inside the window, a label "Select your language:" and a drop-down list with options 
+(Java, Python, C++, JavaScript, C#) are displayed at custom positions.
+  </pre>
+</div>
+
+ <div class="query-section" id="de1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+
+public class DisplayTextUsingLabels {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("Display Text using Labels");
+
+        // Set layout manager (FlowLayout)
+        f.setLayout(new FlowLayout());
+
+        // Create Labels with text
+        Label l1 = new Label("Welcome to Java Programming!");
+        Label l2 = new Label("AWT allows creating GUI applications.");
+        Label l3 = new Label("This is a simple example using Labels.");
+
+        // Add Labels to the Frame
+        f.add(l1);
+        f.add(l2);
+        f.add(l3);
+
+        // Set frame size
+        f.setSize(400, 200);
+
+        // Make frame visible
+        f.setVisible(true);
+
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Welcome to Java Programming!
+AWT allows creating GUI applications.
+This is a simple example using Labels.
+  </pre>
+</div>
+
+ <div class="query-section" id="de2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+
+public class TextAreaPasswordExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("TextArea and Password Field Example");
+
+        // Set layout manager
+        f.setLayout(new FlowLayout());
+
+        // Create a TextArea
+        TextArea ta = new TextArea("Enter your message here...", 5, 30);
+
+        // Create a Label for password
+        Label l = new Label("Password:");
+
+        // Create a Password Field using TextField with echo character
+        TextField pf = new TextField(20);
+        pf.setEchoChar('*');
+
+        // Add components to Frame
+        f.add(ta);
+        f.add(l);
+        f.add(pf);
+
+        // Set frame size
+        f.setSize(400, 300);
+
+        // Make frame visible
+        f.setVisible(true);
+
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Enter your message here...
+Password: *******
+  </pre>
+</div>
+
+ <div class="query-section" id="de3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class ButtonImageExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("Button Click to Display Image");
+        // Set layout
+        f.setLayout(new FlowLayout());
+        // Create a Button
+        Button b = new Button("Show Image");
+        // Create a Label to hold the Image
+        Label imageLabel = new Label();
+        // Add Button and Label to Frame
+        f.add(b);
+        f.add(imageLabel);
+        // Set frame size
+        f.setSize(400, 400);
+        f.setVisible(true);
+        // Load image (replace "image.jpg" with your image path)
+        Image img = Toolkit.getDefaultToolkit().getImage("image.jpg");
+        // Button click event
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                imageLabel.setIcon(new ImageIcon(img)); // set image to label
+            }
+        });
+        // Add window closing functionality
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A window appears titled "Button Click to Display Image".
+Inside the window:
+- A button labeled "Show Image" is displayed.
+- Initially, no image is shown.
+- When the button is clicked, the specified image appears in the frame.
+  </pre>
+</div>
+
+ <div class="query-section" id="de4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class RadioButtonExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("Radio Button Example");
+        // Set layout
+        f.setLayout(new FlowLayout());
+        // Create a CheckboxGroup for radio buttons
+        CheckboxGroup group = new CheckboxGroup();
+        // Create two radio buttons
+        Checkbox rb1 = new Checkbox("Option 1", group, false);
+        Checkbox rb2 = new Checkbox("Option 2", group, false);
+        // Create a Label to display selected option
+        Label selectedLabel = new Label("Selected: None");
+        // Add components to frame
+        f.add(rb1);
+        f.add(rb2);
+        f.add(selectedLabel);
+        // Event handling for radio buttons
+        rb1.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                selectedLabel.setText("Selected: " + rb1.getLabel());
+            }
+        });
+        rb2.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                selectedLabel.setText("Selected: " + rb2.getLabel());
+            }
+        });
+        // Set frame size
+        f.setSize(300, 200);
+        f.setVisible(true);
+        // Window closing
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Selected: None
+Selected: Option 1
+Selected: Option 2
+  </pre>
+</div>
+
+ <div class="query-section" id="de5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class KeyboardEventExample extends Frame implements KeyListener {
+    Label l;
+    KeyboardEventExample() {
+        // Create a label to display key events
+        l = new Label();
+        l.setBounds(20, 50, 300, 50);
+        // Add label to frame
+        add(l);
+        // Set frame properties
+        setSize(400, 200);
+        setLayout(null);
+        setVisible(true);
+        // Add KeyListener
+        addKeyListener(this);
+        // Window closing
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+    public void keyPressed(KeyEvent e) {
+        l.setText("Key Pressed: " + e.getKeyChar());
+    }
+    public void keyReleased(KeyEvent e) {
+        l.setText("Key Released: " + e.getKeyChar());
+    }
+    public void keyTyped(KeyEvent e) {
+        l.setText("Key Typed: " + e.getKeyChar());
+    }
+    public static void main(String[] args) {
+        new KeyboardEventExample();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Key Pressed: A
+Key Released: A
+Key Typed: A
+Key Pressed: B
+Key Released: B
+Key Typed: B
+  </pre>
+</div>
+
+ <div class="query-section" id="de6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class MouseEventExample extends Frame implements MouseListener {
+    Label l;
+    MouseEventxample() {
+        // Create a label to display mouse events
+        l = new Label();
+        l.setBounds(20, 50, 300, 50);
+        add(l);
+        // Set frame properties
+        setSize(400, 300);
+        setLayout(null);
+        setVisible(true);
+        // Add MouseListener
+        addMouseListener(this);
+        // Window closing
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+    public void mouseClicked(MouseEvent e) {
+        l.setText("Mouse Clicked at (" + e.getX() + ", " + e.getY() + ")");
+    }
+    public void mouseEntered(MouseEvent e) {
+        l.setText("Mouse Entered");
+    }
+    public void mouseExited(MouseEvent e) {
+        l.setText("Mouse Exited");
+    }
+    public void mousePressed(MouseEvent e) {
+        l.setText("Mouse Pressed");
+    }
+    public void mouseReleased(MouseEvent e) {
+        l.setText("Mouse Released");
+    }
+    public static void main(String[] args) {
+        new MouseEventExample();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Mouse Entered
+Mouse Pressed
+Mouse Released
+Mouse Clicked at (120, 80)
+Mouse Exited
+  </pre>
+</div>
+
+ <div class="query-section" id="de7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class CheckboxStateExample extends Frame implements ItemListener {
+    Checkbox cb;
+    Label l;
+    CheckboxStateExample() {
+        // Create a Checkbox
+        cb = new Checkbox("Subscribe to Newsletter");
+        // Create a Label to display state
+        l = new Label("Checkbox State: " + cb.getState() + ", Label: " + cb.getLabel());
+        // Set layout and add components
+        setLayout(new FlowLayout());
+        add(cb);
+        add(l);
+        // Add ItemListener
+        cb.addItemListener(this);
+        // Set frame properties
+        setSize(400, 150);
+        setVisible(true);
+        // Window closing
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+    public void itemStateChanged(ItemEvent e) {
+        // Update label when checkbox state changes
+        l.setText("Checkbox State: " + cb.getState() + ", Label: " + cb.getLabel());
+    }
+    public static void main(String[] args) {
+        new CheckboxStateExample();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Checkbox State: false, Label: Subscribe to Newsletter
+Checkbox State: true, Label: Subscribe to Newsletter
+Checkbox State: false, Label: Subscribe to Newsletter
+  </pre>
+</div>
+
+ <div class="query-section" id="de8">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+public class CheckRadioExample extends Frame implements ItemListener 
+    Checkbox cb1, cb2, cb3;
+    Checkbox rb1, rb2;
+    CheckboxGroup bg;
+    Label l;
+    CheckRadioExample() {
+        // Set layout
+        setLayout(new FlowLayout());
+        // Create Checkboxes
+        cb1 = new Checkbox("Java");
+        cb2 = new Checkbox("Python");
+        cb3 = new Checkbox("C++");
+        // Create CheckboxGroup for Radio Buttons
+        bg = new CheckboxGroup();
+        rb1 = new Checkbox("Male", bg, false);
+        rb2 = new Checkbox("Female", bg, false);
+        // Label to display selected options
+        l = new Label("Selected: None");
+        // Add components to frame
+        add(cb1);
+        add(cb2);
+        add(cb3);
+        add(rb1);
+        add(rb2);
+        add(l);
+        // Add ItemListeners
+        cb1.addItemListener(this);
+        cb2.addItemListener(this);
+        cb3.addItemListener(this);
+        rb1.addItemListener(this);
+        rb2.addItemListener(this);
+        // Frame properties
+        setSize(400, 200);
+        setVisible(true);
+        // Window closing
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+    public void itemStateChanged(ItemEvent e) {
+        String selected = "";
+        if (cb1.getState()) selected += "Java ";
+        if (cb2.getState()) selected += "Python ";
+        if (cb3.getState()) selected += "C++ ";
+        if (rb1.getState()) selected += "Male ";
+        if (rb2.getState()) selected += "Female ";
+        if (selected.isEmpty()) selected = "None";
+        l.setText("Selected: " + selected);
+    }
+    public static void main(String[] args) {
+        new CheckRadioExample();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Selected: None
+Selected: Java
+Selected: Java Python
+Selected: Java Python Male
+Selected: Java Python Female
+  </pre>
+</div>
+
+ <div class="query-section" id="de9">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+
+public class SwitchFramesExample {
+
+    Frame f1, f2;
+
+    SwitchFramesExample() {
+        // First Frame
+        f1 = new Frame("Frame 1");
+        f1.setLayout(new FlowLayout());
+        Button toF2 = new Button("Go to Frame 2");
+        f1.add(toF2);
+        f1.setSize(300, 200);
+        f1.setVisible(true);
+
+        // Second Frame
+        f2 = new Frame("Frame 2");
+        f2.setLayout(new FlowLayout());
+        Button toF1 = new Button("Go to Frame 1");
+        f2.add(toF1);
+        f2.setSize(300, 200);
+
+        // Button action to switch to Frame 2
+        toF2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                f1.setVisible(false);
+                f2.setVisible(true);
+            }
+        });
+
+        // Button action to switch to Frame 1
+        toF1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                f2.setVisible(false);
+                f1.setVisible(true);
+            }
+        });
+
+        // Window closing for Frame 1
+        f1.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f1.dispose();
+            }
+        });
+
+        // Window closing for Frame 2
+        f2.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f2.dispose();
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        new SwitchFramesExample();
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Frame 1 is displayed with a button "Go to Frame 2".
+Clicking the button hides Frame 1 and shows Frame 2 with a button "Go to Frame 1".
+Clicking the button on Frame 2 hides Frame 2 and shows Frame 1 again.
+  </pre>
+</div>
+
+ <div class="query-section" id="de10">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents5')">Back</button>
+  </div>
+  <pre>
+import java.awt.*;
+import java.awt.event.*;
+
+public class ButtonBorderExample {
+    public static void main(String[] args) {
+        // Create a Frame
+        Frame f = new Frame("Push Buttons with Border");
+
+        // Set layout
+        f.setLayout(new FlowLayout());
+
+        // Create Buttons
+        Button b1 = new Button("OK");
+        Button b2 = new Button("Cancel");
+
+        // Set colors and font to simulate border effect
+        b1.setBackground(Color.LIGHT_GRAY);
+        b1.setForeground(Color.BLACK);
+        b1.setFont(new Font("Arial", Font.BOLD, 14));
+
+        b2.setBackground(Color.LIGHT_GRAY);
+        b2.setForeground(Color.BLACK);
+        b2.setFont(new Font("Arial", Font.BOLD, 14));
+
+        // Add buttons to frame
+        f.add(b1);
+        f.add(b2);
+
+        // Set frame size and visibility
+        f.setSize(300, 200);
+        f.setVisible(true);
+
+        // Window closing
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                f.dispose();
+            }
+        });
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Two push buttons labeled "OK" and "Cancel" are displayed.
+Buttons have light gray background, black text, and bold font to appear as bordered buttons.
+  </pre>
+</div>
+
+ <div class="query-section" id="a1">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class HelloWorldApplet extends Applet {
+    public void paint(Graphics g) {
+        g.drawString("Hello World", 50, 50);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Hello World
+  </pre>
+</div>
+
+ <div class="query-section" id="a2">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class HelloWorldApplet extends Applet {
+    public void paint(Graphics g) {
+        g.drawString("Hello World", 50, 50);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Hello World
+  </pre>
+</div>
+
+ <div class="query-section" id="a3">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class CircleApplet extends Applet {
+    public void paint(Graphics g) {
+        // Draw a circle at (50, 50) with radius 50
+        g.drawOval(50, 50, 100, 100); // width=100, height=100
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A circle is drawn at coordinates (50,50) with a diameter of 100 pixels.
+  </pre>
+</div>
+
+ <div class="query-section" id="a4">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class PolygonApplet extends Applet {
+    public void paint(Graphics g) {
+        // Define the x and y coordinates of the polygon
+        int xPoints[] = {50, 100, 150, 100, 50};
+        int yPoints[] = {100, 50, 100, 150, 100};
+        int nPoints = 5; // Number of points
+
+        // Draw the polygon
+        g.drawPolygon(xPoints, yPoints, nPoints);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A polygon is drawn connecting the points (50,100), (100,50), (150,100), (100,150), (50,100).
+  </pre>
+</div>
+
+ <div class="query-section" id="a5">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class RectangleApplet extends Applet {
+    public void paint(Graphics g) {
+        // Draw a rectangle at (50,50) with width 150 and height 100
+        g.drawRect(50, 50, 150, 100);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A rectangle is drawn at coordinates (50,50) with width 150 and height 100.
+  </pre>
+</div>
+
+ <div class="query-section" id="a6">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class SquareApplet extends Applet {
+    public void paint(Graphics g) {
+        // Draw a square at (50,50) with side 100
+        g.drawRect(50, 50, 100, 100);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A square is drawn at coordinates (50,50) with each side of 100 pixels.
+  </pre>
+</div>
+
+ <div class="query-section" id="a7">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class ConcentricCirclesApplet extends Applet {
+    public void paint(Graphics g) {
+        int x = 100; // center x
+        int y = 100; // center y
+        int radius = 20; // starting radius
+
+        // Draw 4 concentric circles
+        for(int i = 1; i <= 4; i++) {
+            g.drawOval(x - radius, y - radius, 2 * radius, 2 * radius);
+            radius += 20; // increase radius for next circle
+        }
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+Four concentric circles are drawn with increasing radii centered at (100,100).
+  </pre>
+</div>
+
+ <div class="query-section" id="a8">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class LineApplet extends Applet {
+    public void paint(Graphics g) {
+        // Draw a line from (50,50) to (200,150)
+        g.drawLine(50, 50, 200, 150);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A straight line is drawn from coordinates (50,50) to (200,150).
+  </pre>
+</div>
+
+ <div class="query-section" id="a9">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class OvalApplet extends Applet {
+    public void paint(Graphics g) {
+        // Draw an oval at (50,50) with width 150 and height 100
+        g.drawOval(50, 50, 150, 100);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+An oval is drawn at coordinates (50,50) with width 150 and height 100.
+  </pre>
+</div>
+
+ <div class="query-section" id="a10">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h4>Code:</h4>
+    <button class="back-btn" onclick="showContent('table-of-contents6')">Back</button>
+  </div>
+  <pre>
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class ArcApplet extends Applet {
+    public void paint(Graphics g) {
+        // Draw an arc at (50,50) with width 150 and height 100
+        // Starting angle 0 degrees, arc angle 180 degrees
+        g.drawArc(50, 50, 150, 100, 0, 180);
+    }
+}
+  </pre>
+    <h4>Output:</h4>
+  <pre>
+A half-circle arc is drawn at coordinates (50,50) with width 150 and height 100.
+  </pre>
+</div>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        <footer>
+         <p>Created by <span>Gurleen Kaur Dhaliwal</span> | BCA 5 Sem. | Roll No: <span>4003/23</span></p>
+        </footer>
+    </div>
+</body>
+</html>
